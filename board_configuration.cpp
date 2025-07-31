@@ -29,7 +29,7 @@ Gpio getWarningLedPin() {
 Gpio getCommsLedPin() {
 #ifdef HW_NOT_COMMUNITY_FRANKENSO
   // not f407-discovery but f407-discovery while reusing board file
-  return Gpio::A1;
+  return Gpio::D15;
 #else
   // f407-discovery community board not frankenso
 	return config->communityCommsLedPin;
@@ -62,7 +62,7 @@ void setBoardDefaultConfiguration() {
 
 #ifndef HW_NOT_COMMUNITY_FRANKENSO
   // f407-discovery community board not frankenso
-	config->communityCommsLedPin = Gpio::A1;  // blue LED on discovery
+	config->communityCommsLedPin = Gpio::D15;  // blue LED on discovery
 #endif
 
 	// set optional subsystem configs
