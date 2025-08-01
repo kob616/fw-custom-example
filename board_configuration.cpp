@@ -106,7 +106,3 @@ void setBoardDefaultConfiguration() {
 	engineConfiguration->is_enabled_spi_3 = true;
 
 }
-
-void setup_custom_board_overrides() {
-	custom_board_InitHardware = f407_discovery_boardInitHardware;
-}
