@@ -104,69 +104,7 @@ void setBoardDefaultConfiguration() {
 	engineConfiguration->is_enabled_spi_1 = false;
 	engineConfiguration->is_enabled_spi_2 = false;
 	engineConfiguration->is_enabled_spi_3 = true;
-}
 
-void f407_discovery_boardInitHardware() {
-
-static const struct mc33810_config mc33810 = {
-	.spi_bus = &SPID3,
-	.spi_config = {
-		.circular = false,
-#ifdef _CHIBIOS_RT_CONF_VER_6_1_
-		.end_cb = nullptr,
-#else
-		.slave = false,
-		.data_cb = nullptr,
-		.error_cb = nullptr,
-#endif
-		// todo: use engineConfiguration->mc33810_cs
-		.ssport = GPIOC,
-		.sspad = 5,
-		.cr1 =
-			SPI_CR1_16BIT_MODE |
-			SPI_CR1_SSM |
-			SPI_CR1_SSI |
-			((3 << SPI_CR1_BR_Pos) & SPI_CR1_BR) |	/* div = 16 */
-			SPI_CR1_MSTR |
-			/* SPI_CR1_CPOL | */ // = 0
-			SPI_CR1_CPHA | // = 1
-			0,
-		.cr2 = SPI_CR2_16BIT_MODE
-	},
-	.direct_io = {
-		/* injector drivers */
-		[0] = {.port = GPIOA, .pad = 3},
-		[1] = {.port = GPIOA, .pad = 4},
-		[2] = {.port = nullptr, .pad = 0},
-		[3] = {.port = nullptr, .pad = 0},
-		/* ignition pre-drivers */
-		[4] = {.port = GPIOA, .pad = 0},
-		[5] = {.port = GPIOA, .pad = 1},
-//GPGD mode is not supported yet, ignition mode does not support spi on/off commands
-//	  so ignition signals should be directly driven
-		[6] = {.port = GPIOD, .pad = 0},
-// meaning even if we do not use it we need a pin for now
-		[7] = {.port = GPIOD, .pad = 1},
-	},
-	.en = {.port = GPIOA, .pad = 6}, // copy-paste with setMode code!
-	// TODO: pick from engineConfiguration->spi3sckPin or whatever SPI is used
-	.sck = {.port = GPIOB, .pad = 3},
-	.spkdur = Gpio::Unassigned,
-	.nomi = Gpio::Unassigned,
-	.maxi = Gpio::Unassigned
-};
-
-    if (engineConfiguration->engineType == engine_type_e::FRANKENSO_TEST_33810) {
-	    int ret = mc33810_add(Gpio::MC33810_0_OUT_0, 0, &mc33810);
-	    efiPrintf("*****************+ mc33810_add %d +*******************", ret);
-
-#ifndef EFI_BOOTLOADER
-	    // todo: add to more appropriate location?
-	    addConsoleAction("injinfo", [](){
-	        efiPrintf("injinfo index=%d", engine->fuelComputer.brokenInjector);
-	    });
-#endif // EFI_BOOTLOADER
-	}
 }
 
 void setup_custom_board_overrides() {
