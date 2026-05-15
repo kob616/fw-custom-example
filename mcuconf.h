@@ -107,5 +107,7 @@
 #define STM32_SDC_SDIO_DMA_STREAM           STM32_DMA_STREAM_ID(2, 3)
 
 #include "mcuconf_common_f4_f7.h"
+#undef STM32_WDG_USE_IWDG
+#define STM32_WDG_USE_IWDG                  TRUE
 
 #endif /* MCUCONF_H */
