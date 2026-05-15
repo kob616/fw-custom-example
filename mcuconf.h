@@ -108,7 +108,4 @@
 
 #include "mcuconf_common_f4_f7.h"
 
-#undef STM32_WDG_USE_IWDG
-#define STM32_WDG_USE_IWDG                  TRUE
-
 #endif /* MCUCONF_H */
