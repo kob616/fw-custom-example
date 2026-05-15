@@ -1,6 +1,5 @@
 include $(BOARD_DIR)/firmware/firmware.mk
 
-CSRC := $(filter-out %hal_wdg.c %hal_wdg_lld.c, $(CSRC))
 
 BOARDINC += $(BOARD_DIR)/generated/controllers/generated
 
@@ -22,3 +21,5 @@ DDEFS += -DEFI_WIDEBAND_FIRMWARE_UPDATE=FALSE
 #DDEFS += -DEFI_ONBOARD_MEMS=TRUE
 BOARDINC += $(BOARD_DIR)
 DDEFS += -DMCUCONF_H
+
+DDEFS += -DSTM32_WDG_USE_IWDG=TRUE
