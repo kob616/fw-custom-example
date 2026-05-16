@@ -37,13 +37,6 @@
 #define STM32F407_MCUCONF
 #define STM32F417_MCUCONF
 
-#ifndef STM32_HSE_FREQUENCY
-  #define STM32_HSE_FREQUENCY                 8000000
-#endif
-
-#undef STM32_WDG_USE_IWDG
-#define STM32_WDG_USE_IWDG                  TRUE
-
 // Allows LSE init to timeout and configure fallback RTC clock source in case
 #define RUSEFI_STM32_LSE_WAIT_MAX           5000000
 #define RUSEFI_STM32_LSE_WAIT_MAX_RTCSEL    STM32_RTCSEL_LSI
