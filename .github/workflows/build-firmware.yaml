@@ -13,11 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          submodules: true
+          submodules: false
           
       - name: Switch Submodule to Forked rusEfi
         run: |
-          git submodule sync
+          git submodule init
           git config submodule.ext/rusefi.url "https://github.com/kob616/rusefi.git"
           git submodule update --init --recursive --remote ext/rusefi
 
