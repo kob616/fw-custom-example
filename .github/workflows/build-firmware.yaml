@@ -21,6 +21,10 @@ jobs:
           git config submodule.ext/rusefi.url "https://github.com/kob616/rusefi.git"
           git submodule update --init --recursive --remote ext/rusefi
 
+          cd ext/rusefi
+          echo "=== CURRENT SUBMODULE REMOTE ==="
+          git remote -v
+
       - name: Set run variables
         id: set-variables
         run: |
